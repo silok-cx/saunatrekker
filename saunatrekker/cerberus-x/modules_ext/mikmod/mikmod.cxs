@@ -1,0 +1,133 @@
+' libwave.monkey
+
+#GLFW_COPY_LIBS+="libmikmod-3"
+
+#If HOST="linux"
+  #GLFW_GCC_LIB_OPTS+="-lmikmod"
+#Endif
+
+#If HOST="winnt"
+  #GLFW_GCC_LIB_OPTS+="-lmikmoddll"
+#Endif
+
+
+#If TARGET="glfw"
+
+	import "native/mikmod.${TARGET}.${LANG}"
+
+	EXTERN PRIVATE
+
+	#If TARGET="glfw"
+		Function cxMikmod_Init()
+		Function cxMikmod_Play(path$)
+		Function cxMikmod_Stop()
+		Function cxMikmod_Pause()
+		Function cxMikmod_Resume()
+		Function cxMikmod_Update()
+		Function cxMikmod_Close()
+		Function cxMikmod_SetPosition(pos:Int)
+		Function cxMikmod_Mute(chan:Int)
+		Function cxMikmod_Unmute(chan:Int)
+		Function cxMikmod_GetRow:Int()
+		Function cxMikmod_GetOrder:Int()
+		Function cxMikmod_SetSpeed:Int(speed:Int)
+		Function cxMikmod_SetTempo:Int(tempo:Int)
+		Function cxMikmod_StereoSep:Int(sep:int)
+	#End
+
+#Else
+	Error "Mikmod Only Available On GLFW Target!"
+#End 
+
+Public
+
+Function MikmodInit()
+	#If TARGET="glfw"
+		cxMikmod_Init()
+	#End
+End Function
+
+Function MikmodPlay(path$)
+	#If TARGET="glfw"
+		cxMikmod_Play(path)
+	#End
+End Function
+
+Function MikmodStop()
+	#If TARGET="glfw"
+		cxMikmod_Stop()
+	#End
+End Function
+
+Function MikmodPause()
+	#If TARGET="glfw"
+		cxMikmod_Pause()
+	#End
+End Function
+
+Function MikmodResume()
+	#If TARGET="glfw"
+		cxMikmod_Resume()
+	#End
+End Function
+
+Function MikmodUpdate()
+	#If TARGET="glfw"
+		cxMikmod_Update()
+	#End
+End Function
+
+Function MikmodGetRow()
+	#If TARGET="glfw"
+		 Return cxMikmod_GetRow()
+	#End
+End Function
+
+Function MikmodGetOrder()
+	#If TARGET="glfw"
+		 Return cxMikmod_GetOrder()
+	#End
+End Function
+
+Function MikmodSetPosition(pos:Int)
+	#If TARGET="glfw"
+		cxMikmod_SetPosition(pos)
+	#End
+End Function
+
+Function MikmodMute(chan:Int)
+	#If TARGET="glfw"
+		cxMikmod_Mute(chan)
+	#End
+End Function
+
+Function MikmodUnmute(chan:Int)
+	#If TARGET="glfw"
+		cxMikmod_Unmute(chan)
+	#End
+End Function
+
+Function MikmodSetSpeed(speed:Int)
+	#If TARGET="glfw"
+		cxMikmod_SetSpeed(speed)
+	#End
+End Function
+
+Function MikmodStereoSep(sep:Int)
+	#If TARGET="glfw"
+		cxMikmod_StereoSep(sep)
+	#End
+End Function
+
+Function MikmodSetTempo(tempo:Int)
+	#If TARGET="glfw"
+		cxMikmod_SetTempo(tempo)
+	#End
+End Function
+
+Function MikmodQuit()
+	#If TARGET="glfw"
+		cxMikmod_Close()
+	#End
+End Function
+
